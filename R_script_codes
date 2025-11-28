@@ -1,0 +1,60 @@
+#import dataset
+ds <- read.csv("Fortnite-Statistics.csv")
+
+# Select 5 columns
+selected_ds <- ds[,c("Mental.State","Eliminations","Distance.Traveled","Materials.Gathered","Materials.Used")]
+
+#Set up two plots side by side
+par(mfrow = c(1, 2))   # 1 row, 1 columns layout
+
+# Plot histogram for Filtered sober players
+hist(selected_ds
+     $Eliminations[selected_ds$Mental.State == "sober"],
+     main = "Histogram of Mental State Sober Players",
+     xlab = "Sober players",
+     col = "orange",
+     border = "white")
+
+# Plot histogram for filtered high players
+hist(selected_ds
+     $Eliminations[selected_ds$Mental.State == "high"],
+     main = "Histogram of Mental State High Players",
+     xlab = "High Players",
+     col = "green",
+     border = "white")
+
+# Plot pie for Mental Status
+pie(
+  table(selected_ds$Mental.State),
+  main = "Mental Status of Players",
+  col = rainbow(length(unique(selected_ds$Mental.State))),
+  labels = paste(names(table(selected_ds$Mental.State)), "\n", table(selected_ds$Mental.State)),
+)
+
+# Plot histogram for Time of the Day
+hist(selected_ds
+     $Distance.Traveled,
+     main = "Histogram of Distance Traveled by the Player in the Match",
+     xlab = "Distance Covered by the player",
+     col = "skyblue",
+     border = "white")
+
+# Plot histogram for Time of the Day
+hist(selected_ds
+     $Materials.Gathered,
+     main = "Histogram of Material gathered by the player",
+     xlab = "Material gathered by the player",
+     col = "gold",
+     border = "white")
+
+# Plot histogram for Time of the Day
+hist(selected_ds
+     $Materials.Used,
+     main = "Histogram of Material used by the player",
+     xlab = "Material used by the player",
+     col = "magenta",
+     border = "white")
+
+# Reset layout to single plot
+par(mfrow = c(1, 1))
+
